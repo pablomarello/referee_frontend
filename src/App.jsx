@@ -1,14 +1,14 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import Login from './pages/auth/Login'
+import { Outlet } from 'react-router-dom'
+import Header from './components/common/Header'
 
 function App() {
 
   return (
     <>
-      <Login />
-
+      <Header />
+      <main>
+        <Outlet />
+      </main>
     </>
   )
 }

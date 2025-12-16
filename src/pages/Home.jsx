@@ -1,8 +1,13 @@
-import React from 'react'
+import MatchesList from '../components/matches/MatchesList'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <>
+      <div className='pt-20'>
+        <MatchesList />
+      </div>
+      
+    </>
   )
 }
 

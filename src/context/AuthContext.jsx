@@ -6,6 +6,7 @@ const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     //use effect para setear el user si viene de localstorage
     useEffect(() => {
@@ -15,24 +16,30 @@ export const AuthProvider = ({ children }) => {
             setUser(decoded)
             api.defaults.headers.common["Authorization"] = `Bearer ${token}`
         }
+        setLoading(false)
     }, [])
 
     const login = async (email, password) => {
-        try {
-            const res = await loginUser(email, password)
-            const {token} = res.data
-            const decoded = jwtDecode(token)
-            setUser(decoded)
+  try {
+    const res = await loginUser({
+      email,
+      password
+    });
+    console.log('res.data:', res.data);
+    const { token } = res.data;
+    const decoded = jwtDecode(token);
 
-            localStorage.setItem("token", token)
-            api.defaults.headers.common["Authorization"] = `Bearer ${token}`
+    setUser(decoded);
+    localStorage.setItem("token", token);
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-            return true;
-        } catch (error) {
-            console.error("Login error:", error)
-            return false;
-        }
-    }
+    return true;
+  } catch (error) {
+    console.error("Login error:", error);
+    return false;
+  }
+};
+
 
     const logout = () => {
         setUser(null)
@@ -41,10 +48,10 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, login, logout, loading }}>
             {children}
         </AuthContext.Provider>
     )
 }
 
-export const useAuth = () => { useContext(AuthContext) }
+export const useAuth = () =>  useContext(AuthContext)
