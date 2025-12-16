@@ -25,7 +25,6 @@ export const AuthProvider = ({ children }) => {
       email,
       password
     });
-    console.log('res.data:', res.data);
     const { token } = res.data;
     const decoded = jwtDecode(token);
 

@@ -1,21 +1,19 @@
+import { Link } from "react-router-dom"
 import { useAuth } from "../../context/AuthContext"
 
 const Navbar = () => {
-  const { user, logout } = useAuth()
+  const { user } = useAuth()
 
   return (
-    <header className="h-14 bg-white border-b flex items-center justify-between px-6">
-      <span className="font-semibold">Gestor Fútbol</span>
+    <header className="h-24 bg-slate-800 border-b flex items-center justify-between px-6">
+      <Link
+        to="/"
+        className=" bg-green-700 hover:bg-green-800 transition-colors px-5 py-2 rounded-md text-white font-semibold text-center ml-6 "
+      >
+        Inicio
+      </Link>
 
-      <div className="flex items-center gap-4">
-        <span className="text-sm">{user?.role}</span>
-        <button
-          onClick={logout}
-          className="text-red-500 text-sm"
-        >
-          Cerrar sesión
-        </button>
-      </div>
+      
     </header>
   )
 }

@@ -8,7 +8,7 @@ const MatchesList = () => {
     <>
   <div className='mt-10 text-black p-4 max-w-7xl mx-auto'>
 
-    <h1 className='flex justify-center font-semibold text-4xl m-2'>
+    <h1 className='flex justify-center font-semibold text-4xl m-2 text-white'>
       Partidos
     </h1>
 

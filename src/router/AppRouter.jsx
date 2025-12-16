@@ -22,6 +22,7 @@ import AssignmentCreate from '../pages/assignments/AssignmentCreate'
 import TournamentDetail from '../pages/tournaments/TournamentDetail'
 import TournamentCreate from '../pages/tournaments/TournamentCreate'
 import TournamentEdit from '../pages/tournaments/TournamentEdit'
+import Welcome from '../components/Welcome'
 
 const AppRouter = () => {
   return (
@@ -51,6 +52,9 @@ const AppRouter = () => {
             </PrivateRoute>
           }
         >
+          {/* 👇 RUTA INDEX */}
+  <Route index element={<Welcome />} />
+
           {/* USUARIOS */}
           <Route
             path="users"

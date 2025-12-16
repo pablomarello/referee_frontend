@@ -6,13 +6,26 @@ const UserList = () => {
   if (loading) return <div className="p-4 text-gray-600">Loading...</div>
   if (error) return <div className="p-4 text-red-600">Error: {error?.message ?? String(error)}</div>
   return (
-    <div className="p-4">
-      <Link
+    <>
+    <div className="bg-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between p-8">
+      <div className="flex items-center gap-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users mr-3 text-primary-500"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <div>
+            <h1 className="text-2xl font-bold text-gray-900">Usuarios</h1>
+            <p className="text-sm text-gray-600">Gestiona los usuarios del sistema</p>
+          </div>
+
+      </div>
+<Link
         to="/dashboard/users/create"
         className="mt-3 bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-md active:scale-95 transition-transform"
       >
         Crear usuario
       </Link>
+    </div>
+
+      <div className="p-6">
+      
       <div className="overflow-x-auto bg-white shadow rounded-lg">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
@@ -84,6 +97,8 @@ const UserList = () => {
         </table>
       </div>
     </div>
+    </>
+    
   )
 }
 

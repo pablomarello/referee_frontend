@@ -8,13 +8,49 @@ const TorunamentsList = () => {
   if (error) return <div className="p-4 text-red-600">Error: {error?.message ?? String(error)}</div>
   return (
     <>
-    <Link
+    <div className="bg-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between p-8">
+      <div className="flex items-center gap-3">
+      <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="42"
+  height="42"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  strokeWidth="2"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+  className="text-primary-500"
+>
+  {/* Copa */}
+  <path d="M8 4h8v4a4 4 0 0 1-8 0V4z" />
+
+  {/* Asas */}
+  <path d="M4 6h4v2a4 4 0 0 1-4-4V6z" />
+  <path d="M20 6h-4v2a4 4 0 0 0 4-4V6z" />
+
+  {/* Base */}
+  <path d="M12 12v4" />
+  <path d="M8 20h8" />
+  <path d="M10 16h4" />
+</svg>
+
+<div>
+            <h1 className="text-2xl font-bold text-gray-900">Torneos</h1>
+            <p className="text-sm text-gray-600">Gestiona los torneos</p>
+          </div>
+
+      </div>
+      <Link
         to="/dashboard/tournaments/create"
         className="mt-3 bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-md active:scale-95 transition-transform"
       >
         + Nuevo Torneo
       </Link>
-    <div className="p-4">
+    </div>
+
+    
+    <div className="p-6">
       
       <div className="overflow-x-auto bg-white shadow rounded-lg">
         <table className="min-w-full divide-y divide-gray-200">
