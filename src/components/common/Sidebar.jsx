@@ -7,6 +7,7 @@ const links = [
   { to: "/dashboard/assignments", label: "Designaciones", perm: "read:designaciones" },
   { to: "/dashboard/tournaments", label: "Torneos", perm: "read:torneos" },
   { to: "/dashboard/users", label: "Usuarios", perm: "read:usuarios" },
+  { to: "/dashboard/myassignments", label: "Mis Designaciones", perm: "read:designaciones", roles: ["arbitro"], }
 ]
 
 const Sidebar = () => {
@@ -16,21 +17,27 @@ const Sidebar = () => {
     <aside className="w-auto h-full bg-slate-800 text-white p-4 flex flex-col">
       <div class="flex items-center justify-between border-b border-gray-200">
         <img
-        src={logo}
-        alt="logo"
-        className=" h-20 w-20"
-      />
+          src={logo}
+          alt="logo"
+          className=" h-20 w-20"
+        />
         <Link to="/dashboard">
-      
-        <h2 className="font-bold">Admin</h2>
-      </Link>
+
+          <h2 className="font-bold">Admin</h2>
+        </Link>
       </div>
-      
+
 
       {/* navegación */}
       <nav className="space-y-2">
         {links
-          .filter(link => user?.permissions?.includes(link.perm))
+          .filter(link => {
+            const hasPermission = user?.permissions?.includes(link.perm)
+            const hasRole =
+              !link.roles || link.roles.includes(user?.role)
+
+            return hasPermission && hasRole
+          })
           .map(link => (
             <NavLink
               key={link.to}
@@ -43,15 +50,16 @@ const Sidebar = () => {
               {link.label}
             </NavLink>
           ))}
+
       </nav>
 
-      
+
       <button
-          onClick={logout}
-          className="mt-auto bg-slate-600 hover:bg-slate-700 transition-colors px-4 py-2 rounded-md text-white font-semibold text-center"
-        >
-          Cerrar sesión
-        </button>
+        onClick={logout}
+        className="mt-auto bg-slate-600 hover:bg-slate-700 transition-colors px-4 py-2 rounded-md text-white font-semibold text-center"
+      >
+        Cerrar sesión
+      </button>
     </aside>
   )
 }

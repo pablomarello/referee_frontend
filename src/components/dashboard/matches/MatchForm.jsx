@@ -8,19 +8,34 @@ const statuses = ['programado', 'en progreso', 'finalizado', 'suspendido']
 const MatchForm = ({ onSubmit, defaultValues = {}, initialValues, onCancel }) => {
   const { tournaments } = useTournaments();
   const source = initialValues ?? defaultValues
-  
 
-  const formatDefaults = (dv = {}) => ({
-    date: dv.date ? new Date(dv.date).toISOString().slice(0, 16) : '',
+
+  const formatDefaults = (dv = {}) => {
+  let localDate = '';
+
+  if (dv.date) {
+    const dateObj = new Date(dv.date); // 👈 convertir string → Date
+    localDate = new Date(
+      dateObj.getTime() - dateObj.getTimezoneOffset() * 60000
+    )
+      .toISOString()
+      .slice(0, 16);
+  }
+
+  return {
+    date: localDate,
     home_team: dv.home_team ?? '',
     away_team: dv.away_team ?? '',
     location: dv.location ?? '',
+    city: dv.city ?? '',
     category: dv.category ?? '',
-    tournament: dv.tournament?.name ?? dv.tournament ?? '',
+    tournament: dv.tournament?._id ?? dv.tournament ?? '',
     score_home: dv.score_home ?? 0,
     score_away: dv.score_away ?? 0,
     status: dv.status ?? 'programado',
-  })
+  };
+};
+
 
   const {
     register,
@@ -57,6 +72,12 @@ const MatchForm = ({ onSubmit, defaultValues = {}, initialValues, onCancel }) =>
           <label className="block text-sm font-medium text-gray-700">Ubicación</label>
           <input type="text" {...register('location', { required: 'La ubicación es requerida' })} className="mt-1 block w-full rounded border-gray-300 shadow-sm" />
           {errors.location && <p className="text-xs text-red-600 mt-1">{errors.location.message}</p>}
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Ciudad</label>
+          <input type="text" {...register('city', { required: 'La ciudad es requerida' })} className="mt-1 block w-full rounded border-gray-300 shadow-sm" />
+          {errors.city && <p className="text-xs text-red-600 mt-1">{errors.city.message}</p>}
         </div>
 
         <div>

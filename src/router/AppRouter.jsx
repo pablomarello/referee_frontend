@@ -23,6 +23,7 @@ import TournamentDetail from '../pages/tournaments/TournamentDetail'
 import TournamentCreate from '../pages/tournaments/TournamentCreate'
 import TournamentEdit from '../pages/tournaments/TournamentEdit'
 import Welcome from '../components/Welcome'
+import AsignmentMy from '../pages/assignments/AsignmentMy'
 
 const AppRouter = () => {
   return (
@@ -53,7 +54,7 @@ const AppRouter = () => {
           }
         >
           {/* 👇 RUTA INDEX */}
-  <Route index element={<Welcome />} />
+          <Route index element={<Welcome />} />
 
           {/* USUARIOS */}
           <Route
@@ -187,6 +188,14 @@ const AppRouter = () => {
             element={
               <PermissionRoute permission="update:designaciones">
                 <AsignmentEdit />
+              </PermissionRoute>
+            }
+          />
+          <Route
+            path="myassignments"
+            element={
+              <PermissionRoute permission="read:designaciones">
+                <AsignmentMy />
               </PermissionRoute>
             }
           />
