@@ -1,11 +1,23 @@
 import { useMatches } from '../../hooks/useMatches'
 import { Link } from 'react-router-dom'
+import { ClipLoader } from "react-spinners"
 import { deleteMatch } from '../../services/matches.api'
 
 const MatchesList2 = () => {
   const { matches, loading, error, deleteMatch } = useMatches()
 
-  if (loading) return <div className="p-4 text-gray-600">Loading...</div>
+  if (loading) {
+  return (
+    <div className="flex items-center justify-center h-[60vh]">
+      <ClipLoader
+        size={55}
+        color="#c5224b" // verde (tailwind green-500)
+        loading={loading}
+      />
+    </div>
+  )
+}
+
   if (error) return <div className="p-4 text-red-600">Error: {error?.message ?? String(error)}</div>
   return (
     <>

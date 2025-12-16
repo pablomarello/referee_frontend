@@ -1,10 +1,23 @@
 import { Link } from "react-router-dom";
 import { useAssignments } from "../../hooks/useAssignments";
 import { deleteAssignment } from "../../services/assignments.api";
+import { ClipLoader } from "react-spinners";
 
 
 const AssignmentsList = () => {
   const { assignments, loading, error, deleteAssignment } = useAssignments();
+
+  if (loading) {
+  return (
+    <div className="flex items-center justify-center h-[60vh]">
+      <ClipLoader
+        size={55}
+        color="#c5224b" // verde (tailwind green-500)
+        loading={loading}
+      />
+    </div>
+  )
+}
 
   return (
     <>
