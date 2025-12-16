@@ -35,7 +35,7 @@ const Header = () => {
              ) : (
               <>
                 <Link
-                className="bg-fuchsia-300 hover:bg-fuchsia-400 transition-colors px-4 py-2 rounded-md text-black font-semibold" 
+                className="bg-indigo-600 hover:bg-indigo-700 transition-colors px-4 py-2 rounded-md text-white font-semibold" 
                 to="/login"><li>Iniciar Sesión</li>
               </Link>
               </>

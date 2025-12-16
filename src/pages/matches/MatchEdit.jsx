@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useMatches } from '../../hooks/useMatches'
 import MatchForm from '../../components/dashboard/matches/MatchForm'
+import { ClipLoader } from 'react-spinners'
 
 const MatchEdit = () => {
   const navigate = useNavigate()
   const { id } = useParams()
-  const { updateMatch, getMatchById } = useMatches()
+  const { updateMatch, getMatchById, loading } = useMatches()
   const [matchData, setMatchData] = useState(null)
 
   useEffect(() => {
@@ -28,7 +29,15 @@ const MatchEdit = () => {
 
   // ⛔ No renderizar el form hasta tener datos
   if (!matchData) {
-    return <p className="p-6">Cargando partido...</p>
+    return (
+    <div className="flex items-center justify-center h-[60vh]">
+      <ClipLoader
+        size={55}
+        color="#c5224b" // verde (tailwind green-500)
+        loading={loading}
+      />
+    </div>
+  )
   }
 
   return (

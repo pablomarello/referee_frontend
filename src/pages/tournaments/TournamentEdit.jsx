@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useTournaments } from '../../hooks/useTournaments'
 import TournamentForm from './TournamentForm'
+import { ClipLoader } from 'react-spinners'
 
 const TournamentEdit = () => {
   const navigate = useNavigate()
   const { id } = useParams()
-  const {  updateTournament, getTournamentById } = useTournaments()
+  const {  updateTournament, getTournamentById, loading } = useTournaments()
   const [ tournamentData, setTournamentData] = useState(null)
 
   useEffect(() => {
@@ -26,9 +27,17 @@ const TournamentEdit = () => {
     }
   }
 
-  // ⛔ No renderizar el form hasta tener datos
+  
   if (!tournamentData) {
-    return <p className="p-6">Cargando partido...</p>
+    return (
+    <div className="flex items-center justify-center h-[60vh]">
+      <ClipLoader
+        size={55}
+        color="#c5224b" // verde (tailwind green-500)
+        loading={loading}
+      />
+    </div>
+  )
   }
 
 

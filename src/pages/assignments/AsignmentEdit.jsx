@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAssignments } from '../../hooks/useAssignments'
 import AssignmentForm from './AssignmentForm'
+import { ClipLoader } from 'react-spinners'
 
 const AsignmentEdit = () => {
   const navigate = useNavigate()
   const { id } = useParams()
-  const { updateAssignment, getAssignmentById } = useAssignments()
+  const { updateAssignment, getAssignmentById, loading } = useAssignments()
   const [assignmentData, setAssignmentData] = useState(null)
 
   useEffect(() => {
@@ -28,7 +29,15 @@ const AsignmentEdit = () => {
 
   // ⛔ No renderizar el form hasta tener datos
   if (!assignmentData) {
-    return <p className="p-6">Cargando designación...</p>
+    return (
+    <div className="flex items-center justify-center h-[60vh]">
+      <ClipLoader
+        size={55}
+        color="#c5224b"
+        loading={loading}
+      />
+    </div>
+  )
   }
 
   return (
