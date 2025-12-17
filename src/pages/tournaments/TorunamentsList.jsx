@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { useTournaments } from '../../hooks/useTournaments'
 import { ClipLoader } from 'react-spinners'
+import CreateButton from '../../components/common/CreateButton'
+import Can from '../../components/common/Can'
 
 const TorunamentsList = () => {
   const { tournaments, loading, error, deleteTournament } = useTournaments()
@@ -52,12 +54,19 @@ const TorunamentsList = () => {
           </div>
 
       </div>
-      <Link
+
+      <CreateButton
+          to="/dashboard/tournaments/create"
+          label="Crear Torneo"
+          permission="create:torneos"
+        />
+
+      {/* <Link
         to="/dashboard/tournaments/create"
         className="mt-3 bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-md active:scale-95 transition-transform"
       >
         + Nuevo Torneo
-      </Link>
+      </Link> */}
     </div>
 
     
@@ -84,24 +93,31 @@ const TorunamentsList = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{tournament.createdAt ? new Date(tournament.createdAt).toLocaleString() : ''}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">
                     <div className="flex items-center gap-2">
-                      <Link
+                      <Can permission="read:torneos">
+                        <Link
                         to={`/dashboard/tournaments/${tournament._id}`}
                         className="mt-3 bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md active:scale-95 transition-transform"
                       >
                         Ver
                       </Link>
-                      <Link
+                      </Can>
+                      <Can permission="update:torneos">
+                        <Link
                         to={`/dashboard/tournaments/${tournament._id}/edit`}
                         className="mt-3 bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded-md active:scale-95 transition-transform"
                       >
                         Editar
                       </Link>
-                      <button
+                      </Can>
+                      <Can permission="delete:torneos">
+                        <button
                         onClick={() => deleteTournament(tournament._id)}
                         className="mt-3 bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md active:scale-95 transition-transform"
                       >
                         Eliminar
                       </button>
+                      </Can>
+                      
                     </div>
                   </td>
                 </tr>

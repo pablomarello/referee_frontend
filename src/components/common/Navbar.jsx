@@ -3,6 +3,7 @@ import { useAuth } from "../../context/AuthContext"
 
 const Navbar = () => {
   const { user } = useAuth()
+  console.log("USER",user)
 
   return (
     <header className="h-24 bg-slate-800 border-b flex items-center justify-between px-6">
@@ -12,6 +13,9 @@ const Navbar = () => {
       >
         Inicio
       </Link>
+      <p className="text-white font-semibold">
+        {user.role}
+      </p>
 
       
     </header>

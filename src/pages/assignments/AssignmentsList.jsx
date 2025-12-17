@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useAssignments } from "../../hooks/useAssignments";
 import { deleteAssignment } from "../../services/assignments.api";
 import { ClipLoader } from "react-spinners";
+import CreateButton from '../../components/common/CreateButton'
+import Can from '../../components/common/Can'
 
 
 const AssignmentsList = () => {
@@ -56,12 +58,18 @@ const AssignmentsList = () => {
 
         </div>
 
-        <Link
+        <CreateButton
+          to="/dashboard/assignments/create"
+          label="Crear Designación"
+          permission="create:designaciones"
+        />
+
+        {/* <Link
           to="/dashboard/assignments/create"
           className="mt-3 bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-md active:scale-95 transition-transform"
         >
           Crear Designación
-        </Link>
+        </Link> */}
       </div>
 
       {/* TABLA */}
@@ -100,24 +108,31 @@ const AssignmentsList = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{assignment.assignedAt ? new Date(assignment.assignedAt).toLocaleString() : ''}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                       <div className="flex items-center gap-2">
-                        <Link
+                        <Can permission="read:designaciones">
+                          <Link
                           to={`/dashboard/assignments/${assignment._id}`}
                           className="mt-3 bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md active:scale-95 transition-transform"
                         >
                           Ver
                         </Link>
-                        <Link
+                        </Can>
+                        <Can permission="update:partidos">
+                          <Link
                           to={`/dashboard/assignments/${assignment._id}/edit`}
                           className="mt-3 bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded-md active:scale-95 transition-transform"
                         >
                           Editar
                         </Link>
+                        </Can>
+                        <Can permission="delete:partidos">
                         <button
                           onClick={() => deleteAssignment(assignment._id)}
                           className="mt-3 bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md active:scale-95 transition-transform"
                         >
                           Eliminar
                         </button>
+                        </Can>
+                        
                       </div>
                     </td>
                   </tr>
