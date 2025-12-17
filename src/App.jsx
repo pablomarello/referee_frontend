@@ -26,9 +26,10 @@ function App() {
             backgroundSize: '40px 40px, 40px 40px, 40px 40px, 40px 40px',
           }}
         />
-        <main className='relative z-10 flex-1 flex flex-col '>
-          <Outlet />
-        </main>
+        <main className="relative z-10 flex-1 flex flex-col pt-16">
+  <Outlet />
+</main>
+
       </div>
 
 

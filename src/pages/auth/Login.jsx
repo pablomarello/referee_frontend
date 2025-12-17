@@ -54,7 +54,7 @@ const Login = () => {
                 })}
                 type="email" 
                 placeholder='ejemplo@correo.com'
-                className={`w-full px-4 py-3 rounded-lg border ${errors.email ? 'border-red-500 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200'} focus:border-blue-500 focus:ring-4 outline-none transition-all`}
+                className={`w-full px-4 py-3 rounded-lg border text-gray-900 ${errors.email ? 'border-red-500 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200'} focus:border-blue-500 focus:ring-4 outline-none transition-all`}
               />
               {errors.email && <p className='text-red-500 text-xs mt-1 font-medium'>{errors.email.message}</p>}
             </div>
@@ -70,7 +70,7 @@ const Login = () => {
                 {...register('password', { required: 'La contraseña es requerida' })}
                 type="password" 
                 placeholder='••••••••'
-                className={`w-full px-4 py-3 rounded-lg border ${errors.password ? 'border-red-500 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200'} focus:border-blue-500 focus:ring-4 outline-none transition-all`}
+                className={`w-full px-4 py-3 rounded-lg border text-gray-900 ${errors.password ? 'border-red-500 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200'} focus:border-blue-500 focus:ring-4 outline-none transition-all`}
               />
               {errors.password && <p className='text-red-500 text-xs mt-1 font-medium'>{errors.password.message}</p>}
             </div>
