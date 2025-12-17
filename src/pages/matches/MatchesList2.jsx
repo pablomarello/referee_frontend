@@ -2,21 +2,25 @@ import { useMatches } from '../../hooks/useMatches'
 import { Link } from 'react-router-dom'
 import { ClipLoader } from "react-spinners"
 import { deleteMatch } from '../../services/matches.api'
+import { useAuth } from '../../context/AuthContext'
+import CreateButton from '../../components/common/CreateButton'
+import Can from '../../components/common/Can'
 
 const MatchesList2 = () => {
   const { matches, loading, error, deleteMatch } = useMatches()
+  const { user } = useAuth()
 
   if (loading) {
-  return (
-    <div className="flex items-center justify-center h-[60vh]">
-      <ClipLoader
-        size={55}
-        color="#c5224b" // verde (tailwind green-500)
-        loading={loading}
-      />
-    </div>
-  )
-}
+    return (
+      <div className="flex items-center justify-center h-[60vh]">
+        <ClipLoader
+          size={55}
+          color="#c5224b" // verde (tailwind green-500)
+          loading={loading}
+        />
+      </div>
+    )
+  }
 
   if (error) return <div className="p-4 text-red-600">Error: {error?.message ?? String(error)}</div>
   return (
@@ -57,12 +61,20 @@ const MatchesList2 = () => {
           </div>
         </div>
 
-        <Link
+        <CreateButton
           to="/dashboard/matches/create"
-          className="mt-4 sm:mt-0 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md active:scale-95 transition-transform"
-        >
-          Crear partido
-        </Link>
+          label="Crear Partido"
+          permission="create:partidos"
+        />
+        {/* {user.permissions.includes("create:usuarios") && (
+          <Link
+            to="/dashboard/matches/create"
+            className="mt-4 sm:mt-0 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md active:scale-95 transition-transform"
+          >
+            Crear partido
+          </Link>
+        )} */}
+
       </div>
 
       {/* TABLA */}
@@ -99,24 +111,31 @@ const MatchesList2 = () => {
                     <td className="px-6 py-4 text-sm">{match.tournament?.name ?? match.tournament}</td>
                     <td className="px-6 py-4 text-sm">
                       <div className="flex gap-2">
-                        <Link
-                          to={`/dashboard/matches/${match._id}`}
-                          className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md"
-                        >
-                          Ver
-                        </Link>
-                        <Link
-                          to={`/dashboard/matches/${match._id}/edit`}
-                          className="bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded-md"
-                        >
-                          Editar
-                        </Link>
-                        <button
-                          onClick={() => deleteMatch(match._id)}
-                          className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md"
-                        >
-                          Eliminar
-                        </button>
+                        <Can permission="read:partidos">
+                          <Link
+                            to={`/dashboard/matches/${match._id}`}
+                            className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md"
+                          >
+                            Ver
+                          </Link>
+                        </Can>
+                        <Can permission="update:partidos">
+                          <Link
+                            to={`/dashboard/matches/${match._id}/edit`}
+                            className="bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded-md"
+                          >
+                            Editar
+                          </Link>
+                        </Can>
+                        <Can permission="delete:partidos">
+                          <button
+                            onClick={() => deleteMatch(match._id)}
+                            className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md"
+                          >
+                            Eliminar
+                          </button>
+                        </Can>
+
                       </div>
                     </td>
                   </tr>
