@@ -8,7 +8,7 @@ const Unauthorized = () => {
         403
       </h1>
 
-      <h2 className="text-2xl font-semibold mb-2">
+      <h2 className="text-2xl font-semibold mb-2 text-black">
         Acceso no autorizado
       </h2>
 

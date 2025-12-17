@@ -24,6 +24,7 @@ import TournamentCreate from '../pages/tournaments/TournamentCreate'
 import TournamentEdit from '../pages/tournaments/TournamentEdit'
 import Welcome from '../components/Welcome'
 import AsignmentMy from '../pages/assignments/AsignmentMy'
+import NotFound from '../pages/NotFound'
 
 const AppRouter = () => {
   return (
@@ -35,6 +36,8 @@ const AppRouter = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
+
+          <Route path="*" element={<NotFound />} />
         </Route>
 
         {/* <Route path="/characters/:id" element={<CharacterDetail />} />
