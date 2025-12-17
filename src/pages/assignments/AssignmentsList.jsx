@@ -116,7 +116,7 @@ const AssignmentsList = () => {
                           Ver
                         </Link>
                         </Can>
-                        <Can permission="update:assignments">
+                        <Can permission="update:designaciones">
                           <Link
                           to={`/dashboard/assignments/${assignment._id}/edit`}
                           className="mt-3 bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded-md active:scale-95 transition-transform"
@@ -124,7 +124,7 @@ const AssignmentsList = () => {
                           Editar
                         </Link>
                         </Can>
-                        <Can permission="delete:assignments">
+                        <Can permission="delete:designaciones">
                         <button
                           onClick={() => deleteAssignment(assignment._id)}
                           className="mt-3 bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md active:scale-95 transition-transform"
