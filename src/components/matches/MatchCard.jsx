@@ -17,11 +17,12 @@ const MatchCard = ({ match }) => {
     : '';
 
   return (
+    
     <div className="bg-green-950 rounded-xl shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300 w-full max-w-3xl mx-auto my-4">
       
-      {/* 1. ENCABEZADO: Torneo y Estado (Estilo barra superior) */}
-      <div className="flex justify-between items-center px-6 py-3 border-b border-gray-200 bg-green-950">
-        {/* Nombre del Torneo a la izquierda (donde estaba el ID largo) */}
+      {/* 1. ENCABEZADO: Torneo y Estado */}
+      <div className="flex justify-between items-center px-6 py-3 border-b border-gray-200 ">
+        {/* Nombre del Torneo a la izquierda */}
         <span className="text-white font-bold uppercase tracking-wider text-sm">
           {tournamentName}
         </span>
